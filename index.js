@@ -12,9 +12,11 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-app.get("/login", (req, res, next) =>
-  res.render("login", { title: "Login Page", msg: req.query.msg })
-);
+const router = require("./routers/routes");
+app.use(router);
+
+const api = require("./routers/api");
+app.use(api);
 
 app.listen(port, () => {
     console.log(`running in ${port}`)
