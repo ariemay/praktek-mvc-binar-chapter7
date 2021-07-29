@@ -1,12 +1,22 @@
 const express = require("express");
 
+const login = require("./views/login.ejs");
+
 const app = express();
 const port = 3000;
 
-app.set('view engine', 'ejs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 app.use(express.json());
 app.use(express.urlencoded({
-    extended: true
+    extended: false
 }));
 
+app.get("/login", (req, res, next) =>
+  res.render("login", { title: "Login Page", msg: req.query.msg })
+);
+
+app.listen(port, () => {
+    console.log(`running in ${port}`)
+})
